@@ -1,0 +1,2 @@
+soc,mode,payload_bytes,blocks,clock_mhz,raw_cycles,duration_ms,throughput_mbit_s,static_w,dynamic_w,total_w,clock_dynamic_w,logic_dynamic_w,signal_dynamic_w,bram_dynamic_w,dsp_dynamic_w,mmcm_dynamic_w,saif_matched_nets,saif_total_nets,coverage_pct,confidence,energy_transaction_uJ,energy_bit_nJ,throughput_per_w_mbit_s_w,result
+SE-RISSP,CTR,4096,256,40,46323,1.158075,28.295,0.109,0.146,0.255,0.018,0.002,0.003,0.017,0.000,0.106,8683,31218,28,High,295.309,9.012,110.962,PASS
