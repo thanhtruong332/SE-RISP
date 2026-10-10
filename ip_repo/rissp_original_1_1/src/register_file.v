@@ -1,3 +1,4 @@
+// Author: Thanh Truong
 `timescale 1ns / 1ps
 
 module register_file (
@@ -16,21 +17,19 @@ module register_file (
     integer i;
 
     // --- READ PORT (Combinational) ---
-    // [FIX]: Đọc trực tiếp từ thanh ghi, KHÔNG Forwarding!
-    // Forwarding chỉ cần thiết trong Pipelined CPU và phải xử lý ở tầng ngoài.
-    
+
     assign rs1_data = (rs1_addr == 5'b0) ? 32'b0 : regs[rs1_addr];
     assign rs2_data = (rs2_addr == 5'b0) ? 32'b0 : regs[rs2_addr];
-    
+
     // --- WRITE PORT (Sequential) ---
     always @(posedge clk or negedge rst_n) begin
         if (!rst_n) begin
-            // Reset toàn bộ về 0
+
             for (i = 0; i < 32; i = i + 1)
                 regs[i] <= 32'h0;
         end
         else if (wen && (rdest_addr != 5'b0)) begin
-            // Chỉ ghi khi có tín hiệu wen và không ghi vào x0
+
             regs[rdest_addr] <= rdest_data;
         end
     end

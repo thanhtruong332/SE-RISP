@@ -1,11 +1,8 @@
+// Author: Thanh Truong
 `timescale 1ns / 1ps
 //  axi_rissp_master - BAN SUA
-//
 //  Bug goc: stall_cpu = (state != IDLE)
-//    → tai cycle CPU phat request, state con IDLE nen stall=0
-//    → CPU advance PC + write-back NGAY khi transaction moi bat dau
-//    → LOAD lay RDATA chua ve (sai); STORE lech 1 transaction
-//
+
 //  Fix: them state DONE.
 //    - stall_cpu len NGAY tu cycle co cpu_req
 //    - giu stall suot transaction
@@ -43,7 +40,6 @@ module axi_rissp_master (
 
     wire cpu_req = (|dmem_wstrb) || dmem_read;
 
-    // ── FIX then chot ──
     // Stall NGAY khi co request (state==IDLE && cpu_req),
     // giu suot WRITE/READ. Chi tha o DONE de CPU advance dung 1 cycle.
     assign stall_cpu = (state == IDLE && cpu_req) ||
@@ -69,7 +65,6 @@ module axi_rissp_master (
                     if (cpu_req) begin
                         if (|dmem_wstrb) begin
                             // Latch dia chi + data cua lenh SW hien tai.
-                            // CPU da bi stall ngay tu cycle nay (pc giu nguyen),
                             // nen dmem_addr/dmem_wdata on dinh = dung lenh SW.
                             state         <= WRITE_DATA;
                             m_axi_awaddr  <= dmem_addr;  m_axi_awvalid <= 1;
@@ -99,7 +94,6 @@ module axi_rissp_master (
                     if (read_done_all) state <= DONE;
                 end
 
-                // DONE: stall ha xuong 1 cycle → CPU advance + write-back rd.
                 // Luc nay dmem_rdata DA chac chan = data dung (latch o tren).
                 DONE: begin
                     state <= IDLE;
