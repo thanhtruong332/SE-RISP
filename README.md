@@ -9,6 +9,7 @@ Portable Vivado source package for the SE-RISP design used in the SE-RISSP exper
 - `design/`: Vivado block design and XCI configuration files.
 - `constraints/zedboard.xdc`: ZedBoard constraints.
 - `firmware/CTR_4KiB.coe`: memory initialization image used by the committed block design.
+- `firmware/rev02/`: firmware of the revised manuscript (paper single-block images, polling and minimum-delay variants, four-block NIST images); see its README.
 - `scripts/create_project.tcl`: creates a clean Vivado project using repository-relative paths.
 
 ## Recreate the project
@@ -58,7 +59,7 @@ Architecture and tool metadata are listed in [`docs/REPRODUCIBILITY.md`](docs/RE
 
 ## Evidence package
 
-The reviewer-facing [`reproducibility/`](reproducibility/) directory records tool versions, raw evidence and SHA-256 hashes for release `v1.2.2`.
+The reviewer-facing [`reproducibility/`](reproducibility/) directory records tool versions, raw evidence and SHA-256 hashes for release `v1.3.0`.
 
 ## License
 
